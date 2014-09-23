@@ -14,7 +14,16 @@ object Main {
   /**
    * Exercise 1
    */
-  def pascal(c: Int, r: Int): Int = if (c == 0) 1 else if (r == c) 1 else pascal(c - 1, r - 1) + pascal(c, r - 1)
+//  def pascal(c: Int, r: Int): Int = if (c == 0) 1 else if (r == c) 1 else pascal(c - 1, r - 1) + pascal(c, r - 1)
+  def pascal(c: Int, r: Int): Int = {
+    def pascalAcumulated(acc:Int, cs:List[Int], rs: List[Int]):Int=
+      if (cs.isEmpty) acc else {
+        val c = cs.head
+        val r = rs.head
+        if (c==0||r==c) pascalAcumulated(acc+1,cs.tail,rs.tail) else pascalAcumulated(acc,c-1::c::cs.tail,r-1::r-1::rs.tail) 
+      }
+    pascalAcumulated(0,List(c),List(r))
+  }
 
   /**
    * Exercise 2
